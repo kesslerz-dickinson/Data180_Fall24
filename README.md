@@ -2,13 +2,13 @@
 
 Welcome to our DATA 180 GitHub page! Here we will access the majority of course information including homeworks, code, exams, and datasets. Throughout the semester, in addition to learning about data science, coding with R, and how to build some ML models, you will also familiarize yourself with how GitHub works. For now, take some time to explore our class files here and ensure you can access everything that you will need in the class. If you have any questions, please get in touch!
 
-| Type | Zachary Kessler|
+| Contact | Zachary Kessler|
 |:------:|:----------------:|
 |Email | kesslerz@dickinson.edu|
 | Office | Althouse G19 |
 | Office Hours  |[Calendly](https://calendly.com/kesslerz-dickinson/data-180-oh)<br> TF 3:00-4:30 p.m.|
 
-| Type | QRA: Malena Goldman|
+| Contact | QRA: Malena Goldman|
 |:------:|:----------------:|
 |Email | malkagom@dickinson.edu|
 | Office | Althouse 20X |
