@@ -1,0 +1,62 @@
+---
+title: "Dataframe Exercies"
+subtitle: "Data 180, Professor Kessler"
+author: 
+  name: "My Name"
+  email: "xxxx@dickinson.edu"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+This document contains a set of exercises which we will complete both in class and at home. Please attempt each of these exercises at your own pace.
+
+### First steps...
+
+Create a data frame named `students` with the following columns:
+- `Name`: "Alice", "Bob", "Charlie", "David", "Eva"
+- `Age`: 18, 21, 20, 19, 18
+- `Major`: "Math", "Physics", "Biology", "Chemistry", "Math"
+- `FirstYear`:2024, 2021, 2022, 2023, 2024
+
+# Exercise 1: Create the data frame
+```{r}
+
+```
+
+# Exercise 2: Count rows, columns, and dimensions
+```{r}
+
+```
+# Exercise 3: Filter for Math majors
+```{r}
+
+```
+# Exercise 4: Filter for students older than 22
+```{r}
+
+```
+# Exercise 5: Filter for Math majors older than 22
+```{r}
+
+```
+# Exercise 6: Add GraduationYear column
+```{r}
+
+```
+# Exercise 7: Creating a Vector
+```{r}
+
+```
+# Exercise 8: Indices
+```{r}
+
+```
+# Exercise 9: Creating functions
+```{r}
+
+```
