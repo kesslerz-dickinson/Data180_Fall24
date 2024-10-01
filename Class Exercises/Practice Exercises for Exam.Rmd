@@ -1,0 +1,279 @@
+---
+
+title: "Practice Exercises for Exam 1"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: html_document
+
+---
+
+## Exercise: Assigning Variables in R
+
+1. Assign the value `42` to a variable named `my_number`.
+2. Assign the string `"Hello, R!"` to a variable named `greeting`.
+3. Assign the logical value `FALSE` to a variable named `is_sunny`.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Basic Operations in R
+
+1. Calculate the sum of `25` and `17`.
+2. Multiply `6` by `7` and assign the result to a variable named `product`.
+3. Divide `100` by `4` and subtract `15` from the result.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Creating Vectors
+
+1. Create a numeric vector named `temperatures` containing the values: `23, 17, 21, 19, 25`.
+2. Create a character vector named `fruits` containing the strings: `"apple"`, `"banana"`, `"cherry"`.
+3. Create a sequence of numbers from `1` to `20` and assign it to a variable named `my_sequence`.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Basic Statistics
+
+Using the `temperatures` vector from the previous exercise:
+
+1. Calculate the mean temperature.
+2. Find the median temperature.
+3. Calculate the variance and standard deviation of the temperatures.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Writing For Loops
+
+1. Write a for loop that prints the numbers from `1` to `10`.
+2. Using the `fruits` vector, write a for loop that prints each fruit in the vector.
+3. Write a for loop that calculates the squares of numbers from `1` to `5` and stores them in a vector named `squares`.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Creating Simple Functions
+
+1. Write a function named `add_three` that takes a number as input and returns the number plus three.
+2. Create a function named `is_even` that returns `TRUE` if a number is even and `FALSE` if it's odd.
+3. Define a function named `fahrenheit_to_celsius` that converts a temperature from Fahrenheit to Celsius.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Creating Simple Functions
+
+1. Write a function named `add_three` that takes a number as input and returns the number plus three.
+2. Create a function named `is_even` that returns `TRUE` if a number is even and `FALSE` if it's odd.
+3. Define a function named `fahrenheit_to_celsius` that converts a temperature from Fahrenheit to Celsius.
+
+```{r}
+# Solution
+
+# 1. Function to add three
+add_three <- function(x) {
+  return(x + 3)
+}
+
+# 2. Function to check if a number is even
+is_even <- function(x) {
+  return(x %% 2 == 0)
+}
+
+# 3. Function to convert Fahrenheit to Celsius
+fahrenheit_to_celsius <- function(f) {
+  c <- (f - 32) * 5/9
+  return(c)
+}
+```
+
+---
+
+## Exercise: Creating Data Frames
+
+1. Create a data frame named `students` with the following columns and data:
+
+   | Name     | Age | Major            |
+   |----------|-----|------------------|
+   | Alice    | 20  | Mathematics      |
+   | Bob      | 22  | Physics          |
+   | Charlie  | 19  | Engineering      |
+   | Diana    | 21  | Biology          |
+   | Ethan    | 23  | Computer Science |
+   | Fiona    | 20  | Chemistry        |
+   | George   | 22  | Economics        |
+   | Hannah   | 21  | Psychology       |
+   | Irene    | 20  | Art              |
+   | Jack     | 22  | Literature       |
+
+2. Add a new column to the `students` data frame named `GPA` with the values `3.5`, `3.8`, `3.2`, `3.7`, `3.9`, `3.4`, `3.6`, `3.8`, `3.3`, and `3.7`.
+
+3. Access the `Major` column from the `students` data frame.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Importing Data Frames from Packages
+
+1. Install and load the `MASS` package.
+2. Load the `Boston` data set from the `MASS` package.
+3. Display the first six rows of the `Boston` data set.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Basic Plots with Base R
+
+Using the `Boston` data set:
+
+1. Create a scatter plot of `medv` (median value of owner-occupied homes) vs. `lstat` (percentage of lower status population).
+2. Create a histogram of the `crim` (per capita crime rate by town) variable.
+3. Create a bar plot of the `chas` (Charles River dummy variable) variable.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Barplots and Pie Charts with Base R
+
+1. Create a barplot of the number of students in each `Major` from the `students` data frame.
+2. Create a pie chart of the distribution of `Major` in the `students` data frame.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Scatter Plots with Base R
+
+Using the `cars` dataset:
+
+1. Create a scatter plot of `speed` vs. `dist`.
+2. Add a title and axis labels to the scatter plot.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Data Visualization with ggplot2
+
+1. Install and load the `ggplot2` package.
+2. Using the `mpg` dataset, create a scatter plot of `displ` vs. `hwy`.
+3. Create a bar plot showing the count of cars for each `class`.
+4. Create a histogram of the `cty` (city miles per gallon) variable.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Advanced ggplot2 Visualizations
+
+Using the `mpg` dataset:
+
+1. Create a scatter plot of `displ` vs. `hwy` colored by `class`.
+2. Add a smoothing line (`geom_smooth`) to the scatter plot.
+3. Facet the scatter plot by `year`.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Descriptive Statistics
+
+Using the `iris` dataset:
+
+1. Calculate the mean, median, variance, and standard deviation for the `Sepal.Length` variable.
+2. Find the mode of the `Species` variable.
+3. Summarize the `iris` dataset using the `summary()` function.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Data Manipulation
+
+1. Using the `dplyr` package, select the `Sepal.Length` and `Species` columns from the `iris` dataset.
+2. Filter the `iris` dataset for rows where `Species` is `"setosa"`.
+3. Arrange the `iris` dataset in descending order of `Petal.Width`.
+
+```{r}
+# Your code here
+
+```
+
+---
+
+## Exercise: Calculating Frequencies
+
+1. Using the `table()` function, calculate the frequency of each `Species` in the `iris` dataset.
+2. Create a bar plot of the species frequencies.
+
+```{r}
+# Your code here
+
+```
+
+
+---
+
+## Exercise: Control Structures
+
+1. Write an `if` statement that checks if a number is positive, negative, or zero.
+2. Use a `while` loop to calculate the factorial of `5`.
+
+```{r}
+# Your code here
+
+```
+
