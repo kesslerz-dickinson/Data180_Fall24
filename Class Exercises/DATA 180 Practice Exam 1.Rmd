@@ -99,7 +99,7 @@ b) Create a new column named `Performance` with values "Good" if total sales exc
 # Create the Performance column
 ```
 
-c) Plot a bar chart that shows the total sales of `Product_A` and `Product_B` across all quarters.
+c) Plot a bar chart that shows the total sales of `Product_A` and `Product_B` across all quarters combined.
 
 ```{r}
 # Plot the bar chart
@@ -146,12 +146,7 @@ b) Write a function named `course_summary` that takes a data frame of courses an
 
 ```
 
-c) Find and print the names of students whose course has a difficulty level of "Hard".
 
-```{r}
-# Find students enrolled in courses with difficulty level "Hard"
-
-```
 ---
 
 ### Practice Questions

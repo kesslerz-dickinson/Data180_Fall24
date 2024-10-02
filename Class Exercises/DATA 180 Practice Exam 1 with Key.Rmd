@@ -1,0 +1,239 @@
+### **Practice Exam: DATA 180-01**
+---
+title: "DATA 180-01 Exam Practice with Key"
+subtitle: "Fall 2024, Professor Kessler"
+author: 
+  name: "Your Name"
+  email: "XXXX@dickinson.edu"
+date: "`r format(Sys.Date(), "%B %d, %Y")`"
+output: 
+  html_document
+---
+
+## Problem 1
+(Each part worth 3 points)
+
+Create a vector named `departments` with the names of different company departments: "Finance", "HR", "IT", "Marketing", "Operations"
+
+```{r}
+departments <- c("Finance", "HR", "IT", "Marketing", "Operations")
+departments
+```
+
+a) The `Marketing` department has been renamed to `Sales and Marketing`. Update the vector to reflect this change.
+
+```{r}
+# Replace the incorrect entry in the vector
+departments[4] <- "Sales and Marketing"
+```
+
+b) Write a function named `print_departments` that takes a vector of departments and prints each department along with its position in the vector (e.g., "1: Finance").
+
+```{r}
+# Create the function to print each department and its position
+print_departments <- function(departments) {
+  for (i in departments) {
+    print(i)
+  }
+}
+
+print_departments(departments)
+```
+
+c) Create a data frame named `department_budget` that contains the following information:
+
+|Department         | Budget ($) in Millions |
+|:------------------|:-----------------------|
+|Finance            | 5.0                    |
+|HR                 | 2.0                    |
+|IT                 | 8.0                    |
+|Sales and Marketing| 4.5                    |
+|Operations         | 6.0                    |
+
+```{r}
+# Create the data frame
+department_budget <- data.frame(
+  Department = departments,
+  Budget = c(5.0, 2.0, 8.0, 4.5, 6.0)
+)
+department_budget
+```
+
+d) The budget of the `IT` department has increased by 1.5 million. Update the `department_budget` data frame accordingly.
+
+```{r}
+# Update the budget of IT department
+department_budget[department_budget$Department == "IT",]$Budget <- department_budget[department_budget$Department == "IT",]$Budget + 1.5
+department_budget
+```
+
+e) Calculate the total budget of all departments.
+
+```{r}
+# Calculate the total budget
+total_budget <- sum(department_budget$Budget)
+total_budget
+```
+f) Calculate the mean and median budget.
+
+```{r}
+# Calculate the total budget
+mean(department_budget$Budget)
+median(department_budget$Budget)
+```
+
+
+## Problem 2
+(Each part worth 4 points)
+
+Consider the sales data of a company for two products, `Product_A` and `Product_B`, for each quarter of the year:
+
+```{r}
+sales_data <- data.frame(
+  Quarter = c("Q1", "Q2", "Q3", "Q4"),
+  Product_A = c(15000, 22000, 18000, 24000),
+  Product_B = c(18000, 20000, 21000, 23000)
+)
+sales_data
+```
+
+a) Create a new column named `Total_Sales` that contains the total sales for both products in each quarter.
+
+```{r}
+# Create the Total_Sales column
+sales_data$Total_Sales <- sales_data$Product_A + sales_data$Product_B
+sales_data
+```
+
+b) Write a conditional statement that creates a new column named `Performance` with values "Good" if total sales exceed 40000, otherwise "Needs Improvement".
+
+```{r}
+# Create the Performance column
+perf <- c()
+counter <-1
+for (i in sales_data$Total_Sales){
+  if (i > 40000){
+    perf[counter]<-"Good"
+  }
+  else{
+    perf[counter]<-"Needs Improvement"
+  }
+  counter <- counter+1
+}
+sales_data$Performance <-perf
+sales_data
+```
+
+c) Plot a bar chart that shows the total sales of `Product_A` and `Product_B` combined across all quarters. Do this in both base R and ggplot2.
+
+```{r}
+# Plot the bar chart
+library(ggplot2)
+barplot(sales_data$Total_Sales,col=c(1:4),names=sales_data$Quarter,xlab="Quarters",ylab="Total Sales")
+ggplot(sales_data,aes(Quarter,Total_Sales))+geom_bar(stat="identity",fill=1:4)
+```
+
+d) Write a function named `quarter_summary` that takes the sales data and returns the average sales of `Product_A` and `Product_B`.
+
+```{r}
+# Create the function to calculate average sales
+quarter_summary <- function(sales_data) {
+  avg_product_a <- mean(sales_data$Product_A)
+  avg_product_b <- mean(sales_data$Product_B)
+  result <- c(avg_product_a,avg_product_b)
+  return(result)
+}
+
+quarter_summary(sales_data)
+```
+
+---
+
+## Problem 3
+(Each part worth 5 points)
+
+We have two data frames: `students` with student names and their majors, and `courses` with course details:
+
+```{r}
+students <- data.frame(
+  Student = c("Alice", "Bob", "Charlie", "David", "Eve"),
+  Major = c("Mathematics", "Physics", "Economics", "Computer Science", "Biology")
+)
+
+courses <- data.frame(
+  Course = c("Calculus", "Physics 101", "Econometrics", "Programming 101", "Genetics"),
+  Major = c("Mathematics", "Physics", "Economics", "Computer Science", "Biology")
+)
+```
+
+
+
+a) Create a variable named `course_difficulty` for each course with levels: "Easy", "Medium", "Hard". Assign them as follows: `Calculus` - "Medium", `Physics 101` - "Easy", `Econometrics` - "Hard", `Programming 101` - "Easy", `Genetics` - "Medium".
+
+```{r}
+# Create the factor variable
+course_difficulty <- c("Medium", "Easy", "Hard", "Easy", "Medium")
+courses$difficulty<-course_difficulty
+course_difficulty
+```
+
+b) Write a function named `course_summary` that takes a data frame of courses and returns the number of courses for each difficulty level.
+
+```{r}
+# Create the function to count courses by difficulty level
+course_summary <- function(courses) {
+  table(courses$difficulty)
+}
+
+course_summary(courses)
+```
+
+
+
+---
+
+## Practice Questions
+
+Can a variable be both continuous and discrete?  
+- No, a variable cannot be both continuous and discrete. Discrete variables are countable and finite, whereas continuous variables can take any value within a given range. They represent different types of data measurements.
+
+If a variable `weight_kg` contains a numeric value representing weight with up to two decimal places, what type of variable is `weight_kg`?
+- The variable `weight_kg` is a continuous variable since it can take any value within a range and is measured to a specific level of precision.
+
+What is the main purpose of the `==` operator in R?* 
+- The `==` operator in R is used for **equality comparison. It checks if two values are equal and returns `TRUE` or `FALSE`.
+
+Write a single line of R code that returns the following sequence: (1, 4, 7, 10, 13). Do not simply write out `c(1, 4, 7, 10, 13)`. 
+seq(1, 13, by = 3)
+
+
+If a variable `phone_number` contains the contact number of each person, what type of variable is `phone_number`?
+- The variable `phone_number` is a nominal variable. Although it contains numeric values, it is used as an identifier rather than for quantitative measurement.
+
+Which of the following file extensions is used to save R script files? 
+   c) .R
+
+Why might the median be preferred over the mean when summarizing the central tendency of skewed data?  
+- The median is resistant to outliers, meaning it is less affected by extremely large or small values compared to the mean, making it a better measure of central tendency for skewed data.
+
+What function can be used to view the first few rows of a dataframe object? Implement it on an object called `data_frame_example`. 
+- The head() function is used to view the first few rows of a dataframe object.
+
+What are range, interquartile range (IQR), and standard deviation attempting to measure?
+- Range, IQR, and standard deviation are all measures of variability or dispersion. They help determine how spread out the data is around the center.
+
+What is it called when a distribution has one mode? 
+- A distribution with one mode is called unimodAl.
+
+If a variable `education_level` is coded such that high school = 1, bachelor = 2, master = 3, and PhD = 4, what type of variable is `education_level`?  
+- The variable `education_level` is an ordinal variable, as it represents categories with a natural order but no consistent interval between them.
+
+Name one statistic that is not resistant.
+- The mean is not resistant, as it is affected by outliers and extreme values.
+
+What is the main difference between a boxplot and a scatterplot? 
+- A boxplot is used to visualize the distribution of a single variable, showing the median, quartiles, and potential outliers. A scatterplot is used to show the relationship between two variables, often used to determine if a correlation exists.
+
+--- 
+
+
