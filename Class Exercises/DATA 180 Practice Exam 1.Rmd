@@ -1,0 +1,193 @@
+
+### **Practice Exam: DATA 180-01**
+---
+title: "DATA 180-01 Exam Practice"
+subtitle: "Fall 2024, Professor Kessler"
+author: 
+  name: "Your Name"
+  email: "XXXX@dickinson.edu"
+date: "`r format(Sys.Date(), "%B %d, %Y")`"
+output: 
+  html_document
+---
+
+## Problem 1
+(Each part worth 3 points)
+
+Create a vector named `departments` with the names of different company departments: "Finance", "HR", "IT", "Marketing", "Operations"
+
+```{r}
+
+```
+
+a) The `Marketing` department has been renamed to `Sales and Marketing`. Update the vector to reflect this change.
+
+```{r}
+# Replace the incorrect entry in the vector
+
+```
+
+b) Write a function named `print_departments` that takes a vector of departments and prints each department along with its position in the vector (e.g., "1: Finance").
+
+```{r}
+# Create the function to print each department and its position
+
+```
+
+c) Create a data frame named `department_budget` that contains the following information:
+
+|Department         | Budget ($) in Millions |
+|:------------------|:-----------------------|
+|Finance            | 5.0                    |
+|HR                 | 2.0                    |
+|IT                 | 8.0                    |
+|Sales and Marketing| 4.5                    |
+|Operations         | 6.0                    |
+
+```{r}
+# Create the data frame
+
+```
+
+d) The budget of the `IT` department has increased by 1.5 million. Update the `department_budget` data frame accordingly.
+
+```{r}
+# Update the budget of IT department
+
+```
+
+e) Calculate the total budget of all departments.
+
+```{r}
+# Calculate the total budget
+
+```
+f) Calculate the mean and median budget.
+
+```{r}
+# Calculate the total budget
+
+```
+
+
+---
+
+## Problem 2
+(Each part worth 4 points)
+
+Consider the sales data of a company for two products, `Product_A` and `Product_B`, for each quarter of the year:
+
+```{r}
+sales_data <- data.frame(
+  Quarter = c("Q1", "Q2", "Q3", "Q4"),
+  Product_A = c(15000, 22000, 18000, 24000),
+  Product_B = c(18000, 20000, 21000, 23000)
+)
+sales_data
+```
+
+a) Create a new column named `Total_Sales` that contains the total sales for both products in each quarter.
+
+```{r}
+# Create the Total_Sales column
+
+```
+
+b) Create a new column named `Performance` with values "Good" if total sales exceed 40000, otherwise "Needs Improvement".
+
+```{r}
+# Create the Performance column
+```
+
+c) Plot a bar chart that shows the total sales of `Product_A` and `Product_B` across all quarters.
+
+```{r}
+# Plot the bar chart
+```
+
+d) Write a function named `quarter_summary` that takes the sales data and returns the average sales of `Product_A` and `Product_B`.
+
+```{r}
+# Create the function to calculate average sales
+```
+
+---
+
+## Problem 3
+(Each part worth 5 points)
+
+We have two data frames: `students` with student names and their majors, and `courses` with course details:
+
+```{r}
+students <- data.frame(
+  Student = c('Alice', 'Bob', 'Charlie', 'David', 'Eve'),
+  Major = c('Mathematics', 'Physics', 'Economics', 'Computer Science', 'Biology')
+)
+
+courses <- data.frame(
+  Course = c('Calculus', 'Physics 101', 'Econometrics', 'Programming 101', 'Genetics'),
+  Major = c('Mathematics', 'Physics', 'Economics', 'Computer Science', 'Biology')
+)
+```
+
+
+
+a) Create a variable named `course_difficulty` for each course with levels: "Easy", "Medium", "Hard". Assign them as follows: `Calculus` - "Medium", `Physics 101` - "Easy", `Econometrics` - "Hard", `Programming 101` - "Easy", `Genetics` - "Medium".
+
+```{r}
+# Create the factor variable
+
+```
+
+b) Write a function named `course_summary` that takes a data frame of courses and returns the number of courses for each difficulty level.
+
+```{r}
+# Create the function to count courses by difficulty level
+
+```
+
+c) Find and print the names of students whose course has a difficulty level of "Hard".
+
+```{r}
+# Find students enrolled in courses with difficulty level "Hard"
+
+```
+---
+
+### Practice Questions
+
+Can a variable be both continuous and discrete?
+
+If a variable `weight_kg` contains a numeric value representing weight with up to two decimal places, what type of variable is `weight_kg`?
+
+What is the main purpose of the `==` operator in R?
+
+Write a single line of R code that returns the following vector: (1, 4, 7, 10, 13). Do not simply write out `c(1, 4, 7, 10, 13)`.
+```{r, echo=FALSE, comment=NA}
+
+```
+
+If a variable `phone_number` contains the contact number of each person, what type of variable is `phone_number`?
+
+Which of the following file extensions is used to save R script files?
+   a) .doc  
+   b) .csv  
+   c) .R  
+   d) .xlsx  
+
+Why might the median be preferred over the mean when summarizing the central tendency of skewed data?
+
+What function can be used to view the first few rows of a dataframe object? Implement it on an object called `data_frame_example`. (Note this code does not need to run, just show the correct function)
+
+What are range, interquartile range (IQR), and standard deviation attempting to measure?
+
+What is it called when a distribution has only one mode?
+
+If a variable `education_level` is coded such that high school = 1, bachelor = 2, master = 3, and PhD = 4, what type of variable is `education_level`?
+
+Name one statistic that is not resistant.
+
+What is the main difference between a boxplot and a scatterplot?
+
+
+---
