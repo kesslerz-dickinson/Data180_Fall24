@@ -1,0 +1,145 @@
+
+---
+title: "dplyr Practice Problems"
+author: "Your Name"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+# Introduction
+
+This document contains a set of practice problems designed to help you become familiar with the `dplyr` package in R. The dataset we'll be using is the `diamonds` dataset from the `ggplot2` package.
+
+```{r, include=FALSE}
+# Load necessary packages
+library(dplyr)
+library(ggplot2) # Contains the diamonds dataset
+```
+
+# Problem 1: Exploring the Dataset
+
+**Question:**
+
+1. Load the `diamonds` dataset.
+2. Display the first 6 rows of the dataset.
+3. Use `glimpse()` to get an overview of the dataset structure.
+
+
+
+```{r}
+
+```
+
+# Problem 2: Selecting Columns
+
+**Question:**
+
+1. Create a new data frame called `diamonds_small` that contains only the following columns: `carat`, `cut`, `color`, `price`.
+2. Display the first 6 rows of `diamonds_small`.
+
+
+
+```{r}
+
+```
+
+# Problem 3: Filtering Rows
+
+**Question:**
+
+1. Filter the `diamonds` dataset to include only diamonds with a `cut` of "Ideal" and a `color` of "E".
+2. Assign this filtered dataset to a new object called `ideal_E_diamonds`.
+3. How many diamonds meet these criteria?
+
+
+
+```{r}
+
+
+```
+
+# Problem 4: Arranging Rows
+
+**Question:**
+
+1. Arrange the `diamonds` dataset in descending order of `price`.
+2. Display the first 10 rows of the arranged dataset.
+
+
+
+```{r}
+
+```
+
+# Problem 5: Creating New Variables
+
+**Question:**
+
+1. Create a new variable in the `diamonds` dataset called `price_per_carat` that is calculated as `price / carat`.
+2. Display the first 6 rows of the modified dataset, showing the `carat`, `price`, and `price_per_carat` columns.
+
+
+
+```{r}
+
+```
+
+# Problem 6: Summarizing Data
+
+**Question:**
+
+1. Calculate the average `price` of diamonds for each `cut` type.
+2. Display the results in a data frame with two columns: `cut` and `average_price`.
+
+
+
+```{r}
+
+```
+
+# Problem 7: Chaining Multiple Operations
+
+**Question:**
+
+1. From the `diamonds` dataset, select diamonds with a `carat` greater than 1.5.
+2. For these diamonds, create a new variable `price_per_carat` as before.
+3. Arrange the data in ascending order of `price_per_carat`.
+4. Select only the `carat`, `cut`, `color`, `price_per_carat` columns.
+5. Display the first 10 rows of the resulting dataset.
+
+
+
+```{r}
+
+```
+
+# Problem 8: Counting and Tallying
+
+**Question:**
+
+1. Count the number of diamonds for each combination of `cut` and `color`.
+2. Arrange the results in descending order of the count.
+3. Display the top 10 combinations.
+
+
+
+```{r}
+
+```
+
+# Problem 9: Sampling Data
+
+**Question:**
+
+1. Take a random sample of 100 diamonds from the `diamonds` dataset.
+2. Display the `carat`, `cut`, `color`, and `price` of the sampled diamonds.
+
+
+
+```{r}
+
+```
+
+
+
+---
