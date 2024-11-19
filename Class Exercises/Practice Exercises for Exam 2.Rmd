@@ -1,0 +1,162 @@
+
+---
+title: "Practice Questions for Exam 2"
+output: html_document
+---
+
+```{r, include=FALSE}
+library(dplyr)     
+library(ggplot2)    
+    
+```
+
+
+
+
+### Question 1
+Load the `mtcars` dataset. Use `dplyr` to filter rows where the `mpg` is greater than 25 and display the first 5 rows.
+
+```{r}
+data(mtcars)
+```
+
+### Question 2
+Using the `iris` dataset, group the data by `Species` and calculate the mean `Sepal.Length` for each group.
+
+```{r}
+data(iris)
+```
+
+### Question 3
+Select only the `cyl` and `hp` columns from the `mtcars` dataset and arrange the rows in descending order of `hp`.
+
+```{r}
+data(mtcars)
+```
+
+### Question 4
+Use `mutate` on the `mtcars` dataset to create a new column `weight_kg` by converting the `wt` column (in 1000 lbs) into kilograms.
+
+```{r}
+data(mtcars)
+```
+
+### Question 5
+Filter the `diamonds` dataset to show only diamonds with a `carat` greater than 2.5 and a `price` less than 10,000.
+
+```{r}
+data(diamonds)
+```
+
+### Question 6
+Write a pipeline to:
+- Filter rows in `iris` where `Sepal.Width` > 3.
+- Select the columns `Sepal.Length` and `Species`.
+- Arrange the resulting rows by `Sepal.Length` in ascending order.
+
+```{r}
+data(iris)
+```
+
+### Question 7
+Summarize the `mtcars` dataset to find the average horsepower (`hp`) for each unique number of cylinders (`cyl`).
+
+```{r}
+data(mtcars)
+```
+
+### Question 8
+Add a new column to the `iris` dataset that categorizes `Petal.Length` as "Short" (< 2), "Medium" (2-4), or "Long" (> 4). Hint: use the case_when function which lets you specific that when a value in a column meets a certain condition, it takes on a certain value. Ex. case_when(Petal.Length == 2 ~ "Short")
+
+```{r}
+data(iris)
+```
+
+
+### Question 9
+Compute the Euclidean distances between rows of the `mtcars` dataset using only the columns `mpg`, `disp`, and `hp`.
+
+```{r}
+data(mtcars)
+```
+
+### Question 10
+Using the `iris` dataset, calculate the Manhattan distances between the first 10 rows using `Sepal.Length` and `Petal.Width`.
+
+```{r}
+data(iris)
+```
+
+### Question 11
+Using the `mtcars` dataset's `mpg` and `hp` columns compute the Euclidean distances.
+
+```{r}
+data(mtcars)
+```
+
+
+### Question 12
+Perform hierarchical clustering on the `iris` dataset using only the `Sepal.Length` and `Sepal.Width` columns. Use the `complete` linkage method and plot the resulting dendrogram.
+
+```{r}
+data(iris)
+```
+
+### Question 13
+Using the `mtcars` dataset, cluster the cars based on the `mpg`, `hp`, and `wt` columns. Use the average linkage method.
+
+```{r}
+data(mtcars)
+```
+
+### Question 14
+Write R code to put rectangles around 3 clusters in the dendrogram from clustering the `iris` dataset.
+
+```{r}
+data(iris)
+```
+
+### Question 15
+Write R code to extract the cluster assignments for 3 clusters from a dendrogram created using the `iris` dataset. Hint: Use cuttree.
+
+```{r}
+data(iris)
+```
+
+### Question 16
+Perform k-means clustering on the `iris` dataset using `Petal.Length` and `Petal.Width`. Use `k = 3` and summarize the number of data points in each cluster.
+
+```{r}
+data(iris)
+```
+
+### Question 17
+Using the `mtcars` dataset, determine the optimal number of clusters (`k`) using the Elbow Method for columns `mpg`, `hp`, and `wt`.
+
+```{r}
+data(mtcars)
+```
+
+### Question 18
+Plot the k-means clusters from the `iris` dataset (using `Petal.Length` and `Petal.Width`) on a scatterplot, coloring the points by their cluster assignments.
+
+```{r}
+data(iris)
+```
+
+### Question 19
+Explain how the initial random centroids in k-means can impact the final cluster assignments. Perform k-means clustering on the `mtcars` dataset twice. Only use the mpg, hp, and wt columns.
+
+```{r}
+data(mtcars)
+
+set.seed(123)
+```
+
+### Question 20
+Compare the performance of k-means clustering and hierarchical clustering on the `mtcars` dataset based on columns `mpg`, `hp`, and `wt`. Do they broadly align in the placing the same items in the same clusters?
+
+```{r}
+data(mtcars)
+
+```
