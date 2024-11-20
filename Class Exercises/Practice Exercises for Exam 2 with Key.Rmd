@@ -1,0 +1,199 @@
+---
+title: "Practice Questions for Exam 2"
+output: html_document
+---
+
+```{r, include=FALSE}
+library(dplyr)
+library(ggplot2)
+library(cluster)
+library(stats)
+```
+
+### Question 1
+Load the `mtcars` dataset. Use `dplyr` to filter rows where the `mpg` is greater than 25 and display the first 5 rows.
+
+```{r}
+data(mtcars)
+mtcars %>% filter(mpg > 25) %>% head(5)
+```
+
+### Question 2
+Using the `iris` dataset, group the data by `Species` and calculate the mean `Sepal.Length` for each group.
+
+```{r}
+data(iris)
+iris %>% group_by(Species) %>% summarize(mean_sepal_length = mean(Sepal.Length))
+```
+
+### Question 3
+Select only the `cyl` and `hp` columns from the `mtcars` dataset and arrange the rows in descending order of `hp`.
+
+```{r}
+data(mtcars)
+mtcars %>% select(cyl, hp) %>% arrange(desc(hp))
+```
+
+### Question 4
+Use `mutate` on the `mtcars` dataset to create a new column `weight_kg` by converting the `wt` column (in 1000 lbs) into kilograms.
+
+```{r}
+data(mtcars)
+mtcars %>% mutate(weight_kg = wt * 453.592)
+```
+
+### Question 5
+Filter the `diamonds` dataset to show only diamonds with a `carat` greater than 2.5 and a `price` less than 10,000.
+
+```{r}
+data(diamonds, package = "ggplot2")
+diamonds %>% filter(carat > 2.5, price < 10000)
+```
+
+### Question 6
+Write a pipeline to:
+- Filter rows in `iris` where `Sepal.Width` > 3.
+- Select the columns `Sepal.Length` and `Species`.
+- Arrange the resulting rows by `Sepal.Length` in ascending order.
+
+```{r}
+data(iris)
+iris %>% filter(Sepal.Width > 3) %>% select(Sepal.Length, Species) %>% arrange(Sepal.Length)
+```
+
+### Question 7
+Summarize the `mtcars` dataset to find the average horsepower (`hp`) for each unique number of cylinders (`cyl`).
+
+```{r}
+data(mtcars)
+mtcars %>% group_by(cyl) %>% summarize(avg_hp = mean(hp))
+```
+
+### Question 8
+Add a new column to the `iris` dataset that categorizes `Petal.Length` as "Short" (< 2), "Medium" (2-4), or "Long" (> 4).Hint: use the case_when function which lets you specific that when a value in a column meets a certain condition, it takes on a certain value. Ex. case_when(Petal.Length == 2 ~ "Short")
+
+```{r}
+data(iris)
+iris %>% mutate(petal_length_category = case_when(
+  Petal.Length < 2 ~ "Short",
+  Petal.Length >= 2 & Petal.Length <= 4 ~ "Medium",
+  Petal.Length > 4 ~ "Long"
+))
+```
+
+### Question 9
+Compute the pairwise Euclidean distances between rows of the `mtcars` dataset using only the columns `mpg`, `disp`, and `hp`.
+
+```{r}
+data(mtcars)
+dist(mtcars %>% select(mpg, disp, hp))
+```
+
+### Question 10
+Using the `iris` dataset, calculate the Manhattan distances between the first 10 rows using `Sepal.Length` and `Petal.Width`.
+
+```{r}
+data(iris)
+dist(iris %>% slice(1:10) %>% select(Sepal.Length, Petal.Width), method = "manhattan")
+```
+
+### Question 11
+Using the `mtcars` dataset's `mpg` and `hp` columns compute the Minkowski distances, p=1.5
+```{r}
+data(mtcars)
+mtcars %>% select(mpg, hp) %>%  dist(method="minkowski",p=1.5)
+```
+
+### Question 12
+Perform hierarchical clustering on the `iris` dataset using only the `Sepal.Length` and `Sepal.Width` columns. Use the `complete` linkage method and plot the resulting dendrogram.
+
+```{r}
+data(iris)
+hc <- hclust(dist(iris %>% select(Sepal.Length, Sepal.Width)), method = "complete")
+plot(hc)
+```
+
+### Question 13
+Using the `mtcars` dataset, cluster the cars based on the `mpg`, `hp`, and `wt` columns. Use the `average` linkage method.
+
+```{r}
+data(mtcars)
+hc <- hclust(dist(mtcars %>% select(mpg, hp, wt)), method = "average")
+plot(hc)
+```
+
+### Question 14
+Write R code to put rectangles around 3 clusters in the dendrogram from clustering the `iris` dataset.
+
+```{r}
+data(mtcars)
+hc <- hclust(dist(mtcars %>% select(mpg, hp, wt)))
+plot(hc)
+rect.hclust(hc, k = 3, border = "red")
+```
+
+### Question 15
+Write R code to extract the cluster assignments for 3 clusters from a dendrogram created using the `iris` dataset. Hint: Use cuttree.
+
+```{r}
+data(iris)
+hc <- hclust(dist(iris %>% select(Sepal.Length, Sepal.Width)))
+cutree(hc, k = 3)
+```
+
+### Question 16
+Perform k-means clustering on the `iris` dataset using `Petal.Length` and `Petal.Width`. Use `k = 3` and summarize the number of data points in each cluster.
+
+```{r}
+data(iris)
+kmeans_result <- kmeans(iris %>% select(Petal.Length, Petal.Width), centers = 3)
+iris$clusters <- kmeans_result$cluster
+iris %>% group_by(clusters) %>% summarize(mean_PL = mean(Petal.Length),mean_PW = mean(Petal.Width))
+```
+
+### Question 17
+Using the `mtcars` dataset, determine the optimal number of clusters (`k`) using the Elbow Method for columns `mpg`, `hp`, and `wt`.
+
+```{r}
+data(mtcars)
+wss <- c()
+for (i in 1:10) {
+  wss[i]<-kmeans(mtcars %>% select(mpg, hp, wt), centers = i)$tot.withinss
+}
+plot(1:10, wss, type = "b")
+```
+
+### Question 18
+Plot the k-means clusters from the `iris` dataset (using `Petal.Length` and `Petal.Width`) on a scatterplot, coloring the points by their cluster assignments.
+
+```{r}
+data(iris)
+kmeans_result <- kmeans(iris %>% select(Petal.Length, Petal.Width), centers = 3)
+plot(iris$Petal.Length, iris$Petal.Width, col = kmeans_result$cluster, pch = 19, xlab = "Petal Length", ylab = "Petal Width")
+```
+
+### Question 19
+Explain how the initial random centroids in k-means can impact the final cluster assignments. Perform k-means clustering on the `mtcars` dataset twice with different random seeds. Only use the mpg, hp, and wt columns.
+
+```{r}
+data(mtcars)
+#set.seed(42)
+kmeans_1 <- kmeans(mtcars %>% select(mpg, hp, wt), centers = 3)
+set.seed(123)
+kmeans_2 <- kmeans(mtcars %>% select(mpg, hp, wt), centers = 3)
+
+plot(mpg~hp,data=mtcars,cex.axis=1.3,
+     cex.lab=1.2,cex=1.2)
+points(mpg~hp,data=kmeans_1$centers,pch=10,cex=1.8,col="orange")
+points(mpg~hp,data=kmeans_2$centers,pch=10,cex=1.8,col="purple")
+```
+
+### Question 20
+Compare the performance of k-means clustering and hierarchical clustering on the `mtcars` dataset based on columns `mpg`, `hp`, and `wt`. Do they broadly align in the placing the same items in the same clusters?
+
+```{r}
+data(mtcars)
+kmeans_result <- kmeans(mtcars %>% select(mpg, hp, wt), centers = 3)
+hc <- hclust(dist(mtcars %>% select(mpg, hp, wt)))
+
+```
