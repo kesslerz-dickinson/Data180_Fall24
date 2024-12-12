@@ -1,0 +1,110 @@
+---
+title: "DATA 180 Final Exam Exercises"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#install.packages("gapminder")
+library(gapminder)
+library(tidyverse)
+library(cluster)
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 5,
+  fig.height = 4
+)
+```
+
+## Question 1
+Using the `mtcars` dataset, identify key features of fuel-efficient (mpg>25) cars and compare their similarities using a distance measure. How similar are they on average? What is the average distance between fuel-efficient and inefficient vehicles?
+```{r, echo=TRUE}
+
+```
+
+## Question 2
+In the `iris` dataset, examine the relationship between sepal length and petal length through a scatterplot. Describe any noticeable patterns. 
+```{r, echo=TRUE}
+
+```
+
+## Question 3
+Evaluate how the cut quality of diamonds affects their average price in the `diamonds` dataset. Use a bar chart to represent your findings.
+```{r, echo=TRUE}
+
+```
+
+## Question 4
+Using the `USArrests` dataset, apply hierarchical clustering to normalized data. Represent the clusters in a dendrogram and describe how the clusters change with different methods.
+```{r, echo=TRUE}
+
+```
+
+## Question 5
+Cluster observations in the `iris` dataset based on petal dimensions. Visualize the clusters using a suitable scatterplot.
+```{r, echo=TRUE}
+
+```
+
+## Question 6
+Assess vehicle similarities in the `mtcars` dataset by calculating a Gower distance matrix. Perform clustering and interpret the groups.
+```{r, echo=TRUE}
+
+```
+
+## Question 7
+Perform a regression analysis in the `mtcars` dataset to determine how weight and horsepower affect fuel efficiency. Which impacts fuel efficiency more?
+```{r, echo=TRUE}
+
+```
+
+## Question 8
+Analyze GDP per capita trends over time in the `gapminder` dataset. Highlight the changes across decades and provide a summary.
+```{r, echo=TRUE}
+
+```
+
+## Question 9
+Using the `storms` dataset, analyze variations in maximum wind speed across storm categories. Create a line or bar graph to visualize your findings.
+```{r, echo=TRUE}
+
+```
+
+## Question 10
+Explore the relationship between horsepower and weight in the `mtcars` dataset. Use a scatterplot to summarize your findings and add a regression line.
+```{r, echo=TRUE}
+
+```
+
+## Question 11
+Investigate the correlation between sepal dimensions for each species in the `iris` dataset. Summarize the results with visuals and descriptive text.
+```{r, echo=TRUE}
+
+```
+
+## Question 12
+Apply hierarchical clustering to the `USArrests` dataset and identify key patterns. Use a dendrogram to visualize the clusters.
+```{r, echo=TRUE}
+
+```
+
+## Question 13
+Perform a multiple regression analysis in the `mtcars` dataset to predict fuel efficiency. Identify the most (statistically) significant predictors.
+```{r, echo=TRUE}
+
+```
+
+## Question 14
+Explore GDP per capita trends in Asia over time using the `gapminder` dataset. Only look at observations after 1990 and countries with a population above 1 million at that point. Compare and contrast the trajectories for different countries. What is the relationship between GDP per capita and life expectancy?
+```{r, echo=TRUE}
+
+```
+
+## Question 15
+Use clustering techniques on the `USArrests` dataset to group states into clusters and visualize the clusters using a scatterplot of `Murder` vs `Assault`. Be sure to choose the optimal number of clusters.
+```{r, echo=TRUE}
+set.seed(42)
+
+```
