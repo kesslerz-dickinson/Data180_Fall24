@@ -1,0 +1,200 @@
+---
+title: "DATA 180 Final Exam Exercises"
+author: "Zachary Kessler"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#install.packages("gapminder")
+library(gapminder)
+library(tidyverse)
+library(cluster)
+knitr::opts_chunk$set(
+  message = FALSE,
+  warning = FALSE,
+  fig.align = "center",
+  fig.width = 5,
+  fig.height = 4
+)
+```
+
+## Question 1
+Using the `mtcars` dataset, identify key features of fuel-efficient (mpg>25) cars and compare their similarities using a distance measure. How similar are they on average? What is the average distance between fuel-efficient and inefficient vehicles?
+```{r, echo=TRUE}
+mtcars_fuel_efficient <- mtcars %>% filter(mpg > 25)
+distances_fuel <- dist(mtcars_fuel_efficient)
+avg_dist_fuel <- mean(distances_fuel)
+avg_dist_fuel
+
+distances_all <- dist(mtcars)
+distances_all <-as.matrix(distances_all)
+
+mtcars_label <- mtcars %>% mutate(fuel_eff=ifelse(mpg>25,"Efficient","Inefficient"))
+row_eff <- rownames(mtcars_label[mtcars_label$fuel_eff=="Efficient",])
+row_ineff <- rownames(mtcars_label[mtcars_label$fuel_eff=="Inefficient",])
+
+denom <- length(row_eff)*length(row_ineff)
+numer <- 0
+for (i in row_eff){
+  for (j in row_ineff){
+    numer<-numer+distances_all[i,j]
+  }
+}
+avg_dist_between_groups <- numer/denom
+avg_dist_between_groups
+
+
+```
+
+## Question 2
+In the `iris` dataset, examine the relationship between sepal length and petal length through a scatterplot. Describe any noticeable patterns.
+```{r, echo=TRUE}
+ggplot(iris, aes(x = Sepal.Length, y = Petal.Length)) +
+  geom_point() +
+  labs(title = "Sepal vs Petal Length", x = "Sepal Length", y = "Petal Length")
+
+```
+
+## Question 3
+Evaluate how the cut quality of diamonds affects their average price in the `diamonds` dataset. Use a bar chart to represent your findings.
+```{r, echo=TRUE}
+diamonds_avg_price <- diamonds %>%
+  group_by(cut) %>%
+  summarize(avg_price = mean(price))
+ggplot(diamonds_avg_price, aes(x = cut, y = avg_price)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Average Price by Cut", x = "Cut", y = "Average Price")
+```
+
+## Question 4
+Using the `USArrests` dataset, apply hierarchical clustering to normalized data. Represent the clusters in a dendrogram and describe how the clusters change with different methods.
+```{r, echo=TRUE}
+usarrests_scaled <- scale(USArrests)
+clusters <- hclust(dist(usarrests_scaled),method="single")
+plot(clusters, main = "Dendrogram of USArrests", xlab = "States")
+clusters <- hclust(dist(usarrests_scaled),method="complete")
+plot(clusters, main = "Dendrogram of USArrests", xlab = "States")
+clusters <- hclust(dist(usarrests_scaled),method="average")
+plot(clusters, main = "Dendrogram of USArrests", xlab = "States")
+```
+
+## Question 5
+Cluster observations in the `iris` dataset based on petal dimensions. Visualize the clusters using a suitable scatterplot.
+```{r, echo=TRUE}
+kmeans_result <- kmeans(iris[, 3:4], centers = 3)
+iris$cluster <- as.factor(kmeans_result$cluster)
+ggplot(iris, aes(x = Petal.Length, y = Petal.Width, color = cluster)) +
+  geom_point() +
+  labs(title = "K-means Clustering on Iris", x = "Petal Length", y = "Petal Width")
+```
+
+## Question 6
+Assess vehicle similarities in the `mtcars` dataset by calculating a Gower distance matrix. Perform clustering and interpret the groups.
+```{r, echo=TRUE}
+gower_dist <- daisy(mtcars)
+hclust_result <- hclust(gower_dist)
+plot(hclust_result, main = "Dendrogram of Mtcars", xlab = "Vehicles")
+```
+
+## Question 7
+Perform a regression analysis in the `mtcars` dataset to determine how weight and horsepower affect fuel efficiency. Which impacts fuel efficiency more?
+```{r, echo=TRUE}
+model <- lm(mpg ~ wt + hp, data = mtcars)
+summary(model)
+```
+
+## Question 8
+Analyze GDP per capita trends over time in the `gapminder` dataset. Highlight the changes across decades and provide a summary.
+```{r, echo=TRUE}
+gapminder_summary <- gapminder %>%
+  group_by(year) %>%
+  summarize(avg_gdpPercap = mean(gdpPercap))
+ggplot(gapminder_summary, aes(x = year, y = avg_gdpPercap)) +
+  geom_line() +
+  labs(title = "Global GDP Per Capita Over Time", x = "Year", y = "Average GDP Per Capita")
+```
+
+## Question 9
+Using the `storms` dataset, analyze variations in maximum wind speed across storm categories. Create a line or bar graph to visualize your findings.
+```{r, echo=TRUE}
+storms_summary <- storms %>%
+  group_by(category) %>%
+  summarize(max_wind = max(wind))
+ggplot(storms_summary, aes(x = category, y = max_wind)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Maximum Wind Speed by Storm Category", x = "Category", y = "Max Wind Speed")
+```
+
+## Question 10
+Explore the relationship between horsepower and weight in the `mtcars` dataset. Use a scatterplot to summarize your findings and add a regression line.
+```{r, echo=TRUE}
+ggplot(mtcars, aes(x = wt, y = hp)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Horsepower vs Weight", x = "Weight", y = "Horsepower")
+```
+
+## Question 11
+Investigate the correlation between sepal dimensions for each species in the `iris` dataset. Summarize the results with visuals and descriptive text.
+```{r, echo=TRUE}
+cor_results <- iris %>%
+  group_by(Species) %>%
+  summarize(correlation = cor(Sepal.Length, Sepal.Width))
+ggplot(cor_results, aes(x = Species, y = correlation)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Correlation of Sepal Dimensions by Species", x = "Species", y = "Correlation")
+```
+
+## Question 12
+Apply hierarchical clustering to the `USArrests` dataset and identify key patterns. Use a dendrogram to visualize the clusters.
+```{r, echo=TRUE}
+usarrests_scaled <- scale(USArrests)
+hclust_result <- hclust(dist(usarrests_scaled))
+plot(hclust_result, main = "Dendrogram of USArrests", xlab = "States", sub = "")
+```
+
+## Question 13
+Perform a multiple regression analysis in the `mtcars` dataset to predict fuel efficiency. Identify the most (statistically) significant predictors.
+```{r, echo=TRUE}
+model <- lm(mpg ~ cyl + disp + hp + drat + wt + qsec + vs + am + gear + carb, data = mtcars)
+summary(model)
+```
+
+## Question 14
+Explore GDP per capita trends in Asia over time using the `gapminder` dataset. Only look at observations after 1990 and countries with a population above 1 million at that point. Compare and contrast the trajectories for different countries. What is the relationship between GDP per capita and life expectancy?
+```{r, echo=TRUE}
+gapminder_filtered <- gapminder %>%
+  filter(continent == "Asia" & year > 1990 & pop > 1e6)
+ggplot(gapminder_filtered, aes(x = gdpPercap, y = lifeExp, color = country)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  labs(title = "GDP Per Capita vs Life Expectancy (Asia, >1990)",
+       x = "GDP Per Capita",
+       y = "Life Expectancy")
+ggplot(gapminder_filtered, aes(x = year, y = gdpPercap, color = country)) +
+  geom_line() +
+  labs(title = "GDP Per Capita in Asia Over Time (Post 1990)",
+       x = "Year",
+       y = "GDP Per Capita")
+
+```
+
+## Question 15
+Use clustering techniques on the `USArrests` dataset to group states into clusters and visualize the clusters using a scatterplot of `Murder` vs `Assault`. Be sure to choose the optimal number of clusters.
+```{r, echo=TRUE}
+set.seed(42)
+wss <- sapply(2:10, function(k) {
+  kmeans(USArrests, centers = k, nstart = 50)$tot.withinss
+})
+plot(2:10, wss, type = "b", pch = 19,
+     xlab = "Number of Clusters", ylab = "Total Within-Cluster Sum of Squares",
+     main = "Elbow Method for Optimal Clusters")
+
+optimal_k <- 4
+kmeans_result <- kmeans(USArrests, centers = optimal_k, nstart = 25)
+USArrests$cluster <- as.factor(kmeans_result$cluster)
+ggplot(USArrests, aes(x = Murder, y = Assault, color = cluster)) +
+  geom_point() +
+  labs(title = "Clustering on Murder and Assault Rates", x = "Murder Rate", y = "Assault Rate")
+```
